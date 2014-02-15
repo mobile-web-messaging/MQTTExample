@@ -1,6 +1,9 @@
 MQTTExample
 ===========
 
+
+[![Build Status](https://travis-ci.org/jmesnil/MQTTExample.png?branch=master)](https://travis-ci.org/jmesnil/MQTTExample)
+
 iOS example application using [MQTTKit](https://github.com/jmesnil/MQTTKit).
 
 ![Screenshot of the MQTTExample application](./screenshot.png)

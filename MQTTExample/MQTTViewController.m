@@ -36,7 +36,7 @@
     // block below (retain/release cycle, blah blah blah)
     UISwitch *subSwitch = self.subscribedSwitch;
 
-    // define the handler that will be called when MQTT messages are receive by the client
+    // define the handler that will be called when MQTT messages are received by the client
     [self.client setMessageHandler:^(MQTTMessage *message) {
         // extract the switch status from the message payload
         BOOL on = [message.payloadString boolValue];
@@ -49,14 +49,16 @@
     }];
 
     // connect the MQTT client
-    [self.client connectToHost:kMQTTServerHost completionHandler:^(NSUInteger code) {
-        // The client is connected when this completion handler is called
-        NSLog(@"client is connected with id %@", clientID);
-        // Subscribe to the topic
-        [self.client subscribe:kTopic withCompletionHandler:^(NSArray *grantedQos) {
-            // The client is effectively subscribed to the topic when this completion handler is called
-             NSLog(@"subscribed to topic %@", kTopic);
-         }];
+    [self.client connectToHost:kMQTTServerHost completionHandler:^(MQTTConnectionReturnCode code) {
+        if (code == ConnectionAccepted) {
+            // The client is connected when this completion handler is called
+            NSLog(@"client is connected with id %@", clientID);
+            // Subscribe to the topic
+            [self.client subscribe:kTopic withCompletionHandler:^(NSArray *grantedQos) {
+                // The client is effectively subscribed to the topic when this completion handler is called
+                NSLog(@"subscribed to topic %@", kTopic);
+            }];
+        }
     }];
 }
 

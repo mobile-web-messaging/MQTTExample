@@ -5,4 +5,6 @@ before_install:
     - brew update
     - brew uninstall xctool && brew install xctool
 
-script: xctool build ONLY_ACTIVE_ARCH=NO
+script:
+    - xctool -workspace MQTTExample.xcworkspace -scheme MQTTExample -sdk iphonesimulator -configuration Release build
+
